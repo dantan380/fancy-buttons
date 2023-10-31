@@ -1,10 +1,19 @@
+import { useState } from "react";
+
 const AngryButton = () => {
+  const [anger, setAnger] = useState(0);
+
+  const handleClick = (amount) => {
+    if (anger < 1) {
+      setAnger(anger + amount);
+    } else {
+      setAnger(0);
+    }
+  }
   return (
-    <button className="AngryButton">
-      {/* If you have NOT reached the maximum */}
-      <span>Don't click me too much! </span>
-      {/* If you HAVE reached the maximum */}
-      <span>Rawr!</span>
+    <button className="AngryButton" style={{backgroundColor: `rgba(255,0,0,${anger})`}} onClick={() => {handleClick(0.1)}}>
+      {anger < 1 && <span>Don't click me too much! </span>}
+      {anger > 1 && <span>Rawr!</span>}
     </button>
   );
 };
